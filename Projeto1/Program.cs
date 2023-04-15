@@ -1,13 +1,12 @@
 ﻿using System;
 
-
-
 namespace Projeto1
 {
     
     class Program
     {
 
+        //global variables
 
         public static class Globals
         {
@@ -16,19 +15,21 @@ namespace Projeto1
             public static int f=0;
         }
        
-
+        //main 
         static void Main(string[] args)
         {
-            bool[] AllLamps={true,true,true};
-           
+        
+            //initial text
+
             Instructions();
             Console.WriteLine($"Initial state:");
             LampState();
 
+            //main loop
             while (Globals.f<6)  
             {   
                 
-                
+                //Keys for the buttons
                 ConsoleKeyInfo keys=Console.ReadKey(true);
             
                 if (keys.Key==ConsoleKey.D1)
@@ -44,17 +45,22 @@ namespace Projeto1
                     ChangeLamp(3);
                 }
 
+                //Player wins
                 if (Array.TrueForAll(Globals.lamps, item=>item.Equals(true)))
                 {
-                    Globals.f=0;
+                    
                     Console.ForegroundColor=ConsoleColor.Green;
                     Console.WriteLine($"\n \t \t You won!");
+                    Console.Write($"\t \t You pressed the buttons {Globals.f}");
+                    Console.WriteLine($" times");
+                    Globals.f=0;
                     break;
                 }
 
                 
             }
 
+            //Player loses
             if (Globals.f==6)
             {
                Console.ForegroundColor=ConsoleColor.Red;
@@ -64,6 +70,7 @@ namespace Projeto1
             Console.ResetColor();
         }
 
+        //changes the states of the lamps depending on a
         static void ChangeLamp(int a)
         {
             Globals.f++;
@@ -83,6 +90,7 @@ namespace Projeto1
             LampState();
         }
 
+        //Show the state of the lamps
         static void LampState()
         {
 
@@ -113,6 +121,7 @@ namespace Projeto1
             Console.WriteLine($"\n");
         }
 
+        //text in the beginning to explain to the player how to play
         static void Instructions()
         {
             Console.BackgroundColor=ConsoleColor.DarkCyan;
