@@ -18,20 +18,50 @@ namespace Projeto1
         {
 
             while (Globals.i<6)
-            {
-                if ( Console.ReadKey(true).Key!=ConsoleKey.NumPad1)
+            {   
+                
+            
+                if (Console.ReadKey(true).Key!=ConsoleKey.NumPad1)
                 {
                     ChangeLamp(1);
                 }
+                if (Console.ReadKey(true).Key!=ConsoleKey.NumPad2)
+                {
+                    ChangeLamp(2);
+                }
+                if (Console.ReadKey(true).Key!=ConsoleKey.NumPad3)
+                {
+                    ChangeLamp(3);
+                }
 
-                Console.WriteLine($"{Globals.lamps[0]}");
+                
             }
         }
+
+
         static void ChangeLamp(int a)
         {
-            Globals.lamps[a-1]= !Globals.lamps[a-1];
-            Globals.i++;
+            if (a==1)
+            {
+                Globals.lamps[a-1]= !Globals.lamps[a-1];
+                Globals.i++;
+            }
+            if (a!=1)
+            {
+                Globals.lamps[a-1]= !Globals.lamps[a-1];
+                Globals.lamps[a-2]= !Globals.lamps[a-2];
+                Globals.i++;
+            }
+            Text();
+        }
 
+        static void Text()
+        {
+            foreach (bool item in Globals.lamps)
+                {
+                    Console.Write($"{item}");
+                }
+                Console.WriteLine($"");
         }
        
        
