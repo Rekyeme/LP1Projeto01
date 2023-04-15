@@ -11,7 +11,7 @@ namespace Projeto1
 
         public static class Globals
         {
-            public static int i=0;
+            
             public static bool[] lamps={false,false,false};
             public static int f=0;
         }
@@ -19,13 +19,16 @@ namespace Projeto1
 
         static void Main(string[] args)
         {
+            bool[] AllLamps={true,true,true};
            
             Instructions();
             Console.WriteLine($"Initial state:");
             LampState();
 
-            while (Globals.i<6)
+            while (Globals.f<6)  
             {   
+                
+                
                 ConsoleKeyInfo keys=Console.ReadKey(true);
             
                 if (keys.Key==ConsoleKey.D1)
@@ -41,13 +44,26 @@ namespace Projeto1
                     ChangeLamp(3);
                 }
 
+                if (Array.TrueForAll(Globals.lamps, item=>item.Equals(true)))
+                {
+                    Globals.f=0;
+                    Console.ForegroundColor=ConsoleColor.Green;
+                    Console.WriteLine($"\n \t \t You won!");
+                    break;
+                }
+
                 
             }
-            Console.ForegroundColor=ConsoleColor.Red;
-            Console.WriteLine($"\n \t \t GAME OVER!");
+
+            if (Globals.f==6)
+            {
+               Console.ForegroundColor=ConsoleColor.Red;
+                Console.WriteLine($"\n \t \t GAME OVER!"); 
+            }
 
             Console.ResetColor();
         }
+
         static void ChangeLamp(int a)
         {
             Globals.f++;
@@ -63,7 +79,7 @@ namespace Projeto1
                 Globals.lamps[0]=!Globals.lamps[0];
             }
             
-            Globals.i++;
+            
             LampState();
         }
 
@@ -96,6 +112,7 @@ namespace Projeto1
             
             Console.WriteLine($"\n");
         }
+
         static void Instructions()
         {
             Console.BackgroundColor=ConsoleColor.DarkCyan;
@@ -113,6 +130,8 @@ namespace Projeto1
             Console.WriteLine($"than 6 times \n");
             
         }
+        
+         
        
        
     }
