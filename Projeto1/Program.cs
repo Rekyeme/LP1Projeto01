@@ -11,20 +11,24 @@ namespace Projeto1
 
         public static class Globals
         {
-            public static int i=0;
+            
             public static bool[] lamps={false,false,false};
+            public static int f=0;
         }
        
 
         static void Main(string[] args)
         {
+            bool[] AllLamps={true,true,true};
            
             Instructions();
             Console.WriteLine($"Initial state:");
             LampState();
 
-            while (Globals.i<6)
+            while (Globals.f<6)  
             {   
+                
+                
                 ConsoleKeyInfo keys=Console.ReadKey(true);
             
                 if (keys.Key==ConsoleKey.D1)
@@ -40,13 +44,30 @@ namespace Projeto1
                     ChangeLamp(3);
                 }
 
+                if (Array.TrueForAll(Globals.lamps, item=>item.Equals(true)))
+                {
+                    Globals.f=0;
+                    Console.ForegroundColor=ConsoleColor.Green;
+                    Console.WriteLine($"\n \t \t You won!");
+                    break;
+                }
+
                 
+            }
+
+            if (Globals.f==6)
+            {
+               Console.ForegroundColor=ConsoleColor.Red;
+                Console.WriteLine($"\n \t \t GAME OVER!"); 
             }
 
             Console.ResetColor();
         }
+
         static void ChangeLamp(int a)
         {
+            Globals.f++;
+            Console.WriteLine($"Buttons were pressed {Globals.f} times:\n");
 
             if (a != 1)
             {
@@ -58,12 +79,13 @@ namespace Projeto1
                 Globals.lamps[0]=!Globals.lamps[0];
             }
             
-            Globals.i++;
+            
             LampState();
         }
 
         static void LampState()
         {
+
             foreach (bool item in Globals.lamps)
             {
                 if (item==true)
@@ -76,7 +98,21 @@ namespace Projeto1
                 }
             }
             Console.WriteLine($"\n");
+            foreach (bool item in Globals.lamps)
+            {
+                if (item==true)
+                {
+                    Console.Write($"\t on");
+                }
+                else if (item==false)
+                {
+                    Console.Write($"\t off");
+                }
+            }
+            
+            Console.WriteLine($"\n");
         }
+
         static void Instructions()
         {
             Console.BackgroundColor=ConsoleColor.DarkCyan;
@@ -90,11 +126,15 @@ namespace Projeto1
             Console.WriteLine($"The button 2 of the lamps 1 and 2");
             Console.WriteLine($"And the button 3 of the lamps 2 and 3\n");
             Console.Write($"To win the game the player must turn on all ");
-            Console.WriteLine($"the lamps\n");
+            Console.Write($"the lamps without pressing the buttons more ");
+            Console.WriteLine($"than 6 times \n");
             
         }
+        
+         
        
        
     }
 }
+
 
