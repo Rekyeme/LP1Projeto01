@@ -13,6 +13,7 @@ namespace Projeto1
         {
             public static int i=0;
             public static bool[] lamps={false,false,false};
+            public static int f=0;
         }
        
 
@@ -47,6 +48,8 @@ namespace Projeto1
         }
         static void ChangeLamp(int a)
         {
+            Globals.f++;
+            Console.WriteLine($"Buttons were pressed {Globals.f} times:\n");
 
             if (a != 1)
             {
@@ -64,6 +67,7 @@ namespace Projeto1
 
         static void LampState()
         {
+
             foreach (bool item in Globals.lamps)
             {
                 if (item==true)
@@ -75,6 +79,19 @@ namespace Projeto1
                     Console.Write($"\t \u25CB");
                 }
             }
+            Console.WriteLine($"\n");
+            foreach (bool item in Globals.lamps)
+            {
+                if (item==true)
+                {
+                    Console.Write($"\t on");
+                }
+                else if (item==false)
+                {
+                    Console.Write($"\t off");
+                }
+            }
+            
             Console.WriteLine($"\n");
         }
         static void Instructions()
@@ -90,7 +107,8 @@ namespace Projeto1
             Console.WriteLine($"The button 2 of the lamps 1 and 2");
             Console.WriteLine($"And the button 3 of the lamps 2 and 3\n");
             Console.Write($"To win the game the player must turn on all ");
-            Console.WriteLine($"the lamps\n");
+            Console.Write($"the lamps without pressing the buttons more ");
+            Console.WriteLine($"than 6 times \n");
             
         }
        
