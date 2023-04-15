@@ -43,6 +43,8 @@ namespace Projeto1
 
                 
             }
+            Console.ForegroundColor=ConsoleColor.Red;
+            Console.WriteLine($"\n \t \t GAME OVER!");
 
             Console.ResetColor();
         }
