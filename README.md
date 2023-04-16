@@ -178,3 +178,6 @@ Por fim, este último método é o responsável por definir e mostrar as regras 
         }
         
         
+## Fluxograma
+![Diagrama_Projeto01LP1](https://user-images.githubusercontent.com/115167862/232330353-77d7f451-f1ce-4a34-a52d-0b18047a7946.png)
+
