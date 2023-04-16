@@ -186,6 +186,6 @@ Por fim, este último método é o responsável por definir e mostrar as regras 
 
 ## Referências
 As primeiras partes de código escritas que foram posteriormente apagadas totalmente foram criadas com a ajuda do Chat GPT e do Google.
-De resto, não foi usada nenhuma referência para a realização do programa.
+De resto, não foi usada nenhuma referência para a realização do projeto.
 
 
