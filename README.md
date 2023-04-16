@@ -11,14 +11,14 @@ Vitoria Rodrigues (a22204356): Criou a pasta do projeto após o commit inicial. 
 
 Inicialmente, começou por definir-se cada objeto individualmente, por exemplo:
 
-            //Creates the 2nd button that changes the state of the 1st and 2nd lamp;
-            //Example: If the 1st lamp is On and the 2nd is Off, switch their states to Off and On;
-            button2 = new Button();
-            button2.Location = new System.Drawing.Point(125, 15);
-            button2.Size = new.System.Drawing.Size(90,30);
-            button2.Label = "Lamp 1 and Lamp 2";
-            button2.Press += System.EventHandler(button2.Press);
-            this.Controls.Add(button2)
+            //Creates the 3rd button that changes the state of the 2nd and 3rd lamp;
+            //Example: If the 2nd lamp is On and the 3rd is Off, switch their states to Off and On;
+            button3 = new Button();
+            button3.Location = new System.Drawing.Point(225, 15);
+            button3.Size = new.System.Drawing.Size(90,30);
+            button3.Label = "Lamp 2 and Lamp 3";
+            button3.Press += System.EventHandler(button3.Press);
+            this.Controls.Add(button3)
 
             //Creates the 1st lamp
             lamp1 = new Lamp();
@@ -27,13 +27,67 @@ Inicialmente, começou por definir-se cada objeto individualmente, por exemplo:
             lamp1.Label = "Lamp 1";
             this.Controls.Add(lamp1)
             
-Dado o facto que esta abordagem era bastante ineficiente, acabou por ser totalmente corrigida nos commits que se seguiram.
+Dado o facto que esta abordagem era totalmente ineficiente, acabou por ser totalmente corrigida nos commits que se seguiram.
 
-Começou-se então por criar e defenir uma classe 'Globals'. Dentro dessa classe foram criadas duas variáveis: um array de boleanos definido como 'lamps' representando o estado das três lampadas e uma variável de inteiros denominada 'f' representando o numero de vezes que o jogador pressionou os botões.
 
-        public static class Globals
-        {
+Começou-se então por criar e definir uma classe 'Globals'. Dentro dessa classe foram criadas duas variáveis: um array de booleanos definido como 'lamps' representando o estado das três lâmpadas e uma variável de inteiros denominada 'f' representando o número de vezes que o jogador pressiona os botões.
+
+            public static class Globals
+            {
+
+                public static bool[] lamps={false,false,false};
+                public static int f=0;
+            }
+        
+        
+De seguida foi adicionado um método 'main'. Este método dá início ao loop do jogo, onde começa por mostrar as instruções do jogo e o estado inicial das lâmpadas.
+Após isso, este método lê as teclas pressionadas pelo jogador e chama o método 'ChangeLamp'. 
+Por fim, se o jogador ganhar, aparece uma mensagem com o número de movimentos efetuados pelo mesmo e faz reset ao contador de teclas pressionadas, caso contrário aparece uma mensagem a dizer que o jogo acabou.
+             
+            //main loop
+            while (Globals.f<6)  
+            {   
+                
+                //Keys for the buttons
+                ConsoleKeyInfo keys=Console.ReadKey(true);
             
-            public static bool[] lamps={false,false,false};
-            public static int f=0;
+                if (keys.Key==ConsoleKey.D1)
+                {
+                    ChangeLamp(1);
+                }
+                else if (keys.Key==ConsoleKey.D2)
+                {
+                    ChangeLamp(2);
+                }
+                else if (keys.Key==ConsoleKey.D3)
+                {
+                    ChangeLamp(3);
+                }
+
+                //Player wins
+                if (Array.TrueForAll(Globals.lamps, item=>item.Equals(true)))
+                {
+                    
+                    Console.ForegroundColor=ConsoleColor.Green;
+                    Console.WriteLine($"\n \t \t You won!");
+                    Console.Write($"\t \t You pressed the buttons {Globals.f}");
+                    Console.WriteLine($" times");
+                    Globals.f=0;
+                    break;
+                }
+
+                
+            }
+
+            //Player loses
+            if (Globals.f==6)
+            {
+               Console.ForegroundColor=ConsoleColor.Red;
+                Console.WriteLine($"\n \t \t GAME OVER!"); 
+            }
+
+            Console.ResetColor();
         }
+        
+      
+ 
