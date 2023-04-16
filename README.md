@@ -11,7 +11,8 @@ Vitoria Rodrigues (a22204356): Criou a pasta do projeto após o commit inicial. 
 
 Inicialmente, começou por definir-se cada objeto individualmente, por exemplo:
 
-'
+'''
+{
             //Creates the 2nd button that changes the state of the 1st and 2nd lamp;
             //Example: If the 1st lamp is On and the 2nd is Off, switch their states to Off and On;
             button2 = new Button();
@@ -20,4 +21,5 @@ Inicialmente, começou por definir-se cada objeto individualmente, por exemplo:
             button2.Label = "Lamp 1 and Lamp 2";
             button2.Press += System.EventHandler(button2.Press);
             this.Controls.Add(button2)
-'
+}            
+'''
