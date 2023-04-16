@@ -44,6 +44,16 @@ De seguida foi adicionado um método 'main'. Este método dá início ao loop do
 Após isso, este método lê as teclas pressionadas pelo jogador e chama o método 'ChangeLamp'. 
 Por fim, se o jogador ganhar, aparece uma mensagem com o número de movimentos efetuados pelo mesmo e faz reset ao contador de teclas pressionadas, caso contrário aparece uma mensagem a dizer que o jogo acabou.
              
+        //main 
+        static void Main(string[] args)
+        {
+        
+            //initial text
+
+            Instructions();
+            Console.WriteLine($"Initial state:");
+            LampState();
+
             //main loop
             while (Globals.f<6)  
             {   
@@ -90,4 +100,81 @@ Por fim, se o jogador ganhar, aparece uma mensagem com o número de movimentos e
         }
         
       
- 
+O próximo método, 'ChangeLamp', está encarregue de incrementar o contador de movimentos, trocar os estados das lâmpadas e mostrar o novo estado em que as mesmas se encontram. 
+
+            //changes the states of the lamps depending on a
+            static void ChangeLamp(int a)
+            {
+                Globals.f++;
+                Console.WriteLine($"Buttons were pressed {Globals.f} times:\n");
+
+                if (a != 1)
+                {
+                    Globals.lamps[a-1]= !Globals.lamps[a-1];
+                    Globals.lamps[a-2]= !Globals.lamps[a-2];
+                }
+                else 
+                {
+                    Globals.lamps[0]=!Globals.lamps[0];
+                }
+                
+                
+O método seguinte mostra o estado das lâmpadas como círculos juntamente com as palavras 'On' e 'Off'.
+
+            LampState();
+        }
+
+        //Show the state of the lamps
+        static void LampState()
+        {
+
+            foreach (bool item in Globals.lamps)
+            {
+                if (item==true)
+                {
+                    Console.Write($"\t \u25CF");
+                }
+                else if (item==false)
+                {
+                    Console.Write($"\t \u25CB");
+                }
+            }
+            Console.WriteLine($"\n");
+            foreach (bool item in Globals.lamps)
+            {
+                if (item==true)
+                {
+                    Console.Write($"\t on");
+                }
+                else if (item==false)
+                {
+                    Console.Write($"\t off");
+                }
+            }
+
+
+Por fim, este último método é o responsável por definir e mostrar as regras do jogo.
+
+            Console.WriteLine($"\n");
+        }
+
+        //text in the beginning to explain to the player how to play
+        static void Instructions()
+        {
+            Console.BackgroundColor=ConsoleColor.DarkCyan;
+            Console.WriteLine($"\nINSTRUCTIONS:\n");
+            Console.WriteLine($"This game has 3 lamps and 3 buttons.");
+            Console.WriteLine($"When the lamp is turned off: \u25CB");
+            Console.WriteLine($"When the lamp is turned on:  \u25CF \n");
+            Console.Write($"To press the buttons 1,2 and 3 the player ");
+            Console.WriteLine($"must press the keys 1,2 and 3, respectively");
+            Console.WriteLine($"The button 1 switches the state of the lamp 1");
+            Console.WriteLine($"The button 2 of the lamps 1 and 2");
+            Console.WriteLine($"And the button 3 of the lamps 2 and 3\n");
+            Console.Write($"To win the game the player must turn on all ");
+            Console.Write($"the lamps without pressing the buttons more ");
+            Console.WriteLine($"than 6 times \n");
+            
+        }
+        
+        
